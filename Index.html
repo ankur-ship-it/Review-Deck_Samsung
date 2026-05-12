@@ -1,0 +1,1466 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Samsung × Firework | AI Commerce Business Review Jan–Apr 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Figtree:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style>
+:root{
+  --bg: #000000;
+  --surface: #0a0a0a;
+  --surface2: #111111;
+  --surface3: #161616;
+  --border: #1e1e1e;
+  --border2: #2a2a2a;
+  --white: #ffffff;
+  --grey: #888888;
+  --grey2: #555555;
+  --accent: #0C6BFF;
+  --accent2: #2a7fff;
+  --accent-glow: rgba(12,107,255,0.15);
+  --accent-soft: rgba(12,107,255,0.08);
+  --font-primary: 'Inter', sans-serif;
+  --font-secondary: 'Figtree', sans-serif;
+  --slide-h: 100vh;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-snap-type:y mandatory}
+body{background:var(--bg);color:var(--white);font-family:var(--font-primary);overflow-x:hidden}
+.slide{
+  min-height:var(--slide-h);
+  scroll-snap-align:start;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  padding:60px 80px;
+  position:relative;
+  overflow:hidden;
+}
+.slide-inner{max-width:1400px;width:100%;margin:0 auto}
+
+/* NAV */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:18px 40px;
+  background:rgba(0,0,0,0.85);
+  backdrop-filter:blur(20px);
+  border-bottom:1px solid var(--border);
+}
+.nav-brand{display:flex;align-items:center;gap:12px;font-size:13px;font-weight:600;letter-spacing:0.05em;color:var(--grey)}
+.nav-brand span{color:var(--white)}
+.nav-brand .sep{color:var(--grey2)}
+.nav-dots{display:flex;gap:8px}
+.nav-dot{width:6px;height:6px;border-radius:50%;background:var(--grey2);cursor:pointer;transition:all 0.3s}
+.nav-dot.active{background:var(--accent);box-shadow:0 0 8px var(--accent)}
+.nav-tag{font-size:11px;color:var(--accent);font-weight:600;letter-spacing:0.1em;border:1px solid rgba(12,107,255,0.3);padding:4px 10px;border-radius:20px;background:var(--accent-soft)}
+
+/* GRID TEXTURE */
+.grid-bg{
+  position:absolute;inset:0;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+  background-size:60px 60px;
+  pointer-events:none;
+}
+.noise{
+  position:absolute;inset:0;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+  pointer-events:none;opacity:0.4;
+}
+.accent-orb{
+  position:absolute;border-radius:50%;
+  background:radial-gradient(circle, rgba(12,107,255,0.12) 0%, transparent 70%);
+  pointer-events:none;
+}
+
+/* TYPOGRAPHY */
+.eyebrow{font-size:11px;font-weight:700;letter-spacing:0.18em;color:var(--accent);text-transform:uppercase;margin-bottom:16px;font-family:var(--font-secondary)}
+.headline{font-family:var(--font-primary);font-size:clamp(42px,5vw,72px);font-weight:900;line-height:1.0;letter-spacing:-0.03em;color:var(--white)}
+.headline .dim{color:var(--grey2)}
+.subhead{font-size:clamp(16px,2vw,22px);font-weight:400;color:var(--grey);line-height:1.5;margin-top:20px;font-family:var(--font-secondary)}
+.section-title{font-size:clamp(28px,3vw,48px);font-weight:800;letter-spacing:-0.025em;line-height:1.1}
+.label{font-size:11px;font-weight:600;letter-spacing:0.12em;color:var(--grey);text-transform:uppercase;font-family:var(--font-secondary)}
+.insight-text{font-size:15px;color:var(--grey);line-height:1.6;font-family:var(--font-secondary)}
+
+/* DIVIDER */
+.divider{height:1px;background:linear-gradient(90deg,transparent,var(--border2),transparent);margin:40px 0}
+
+/* KPI CARDS */
+.kpi-grid{display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));margin-top:40px}
+.kpi-card{
+  background:var(--surface2);
+  border:1px solid var(--border);
+  border-radius:12px;
+  padding:24px;
+  position:relative;
+  overflow:hidden;
+  transition:border-color 0.3s,transform 0.3s;
+}
+.kpi-card:hover{border-color:var(--accent);transform:translateY(-2px)}
+.kpi-card.accent-card{border-color:rgba(12,107,255,0.4);background:linear-gradient(135deg,var(--accent-soft),var(--surface2))}
+.kpi-card .kpi-val{font-size:clamp(28px,3vw,42px);font-weight:900;letter-spacing:-0.03em;color:var(--white);line-height:1}
+.kpi-card .kpi-val.accent{color:var(--accent)}
+.kpi-card .kpi-label{font-size:11px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--grey);margin-top:8px;font-family:var(--font-secondary)}
+.kpi-card .kpi-delta{font-size:12px;font-weight:600;color:#22c55e;margin-top:6px;display:flex;align-items:center;gap:4px}
+.kpi-card .kpi-delta.neg{color:#ef4444}
+.kpi-card .kpi-bar{height:2px;background:var(--border);border-radius:1px;margin-top:12px;overflow:hidden}
+.kpi-card .kpi-bar-fill{height:100%;background:var(--accent);border-radius:1px;transition:width 1.5s ease}
+
+/* CHART CONTAINERS */
+.chart-wrap{background:var(--surface2);border:1px solid var(--border);border-radius:16px;padding:28px;position:relative}
+.chart-title{font-size:13px;font-weight:700;letter-spacing:0.06em;color:var(--grey);text-transform:uppercase;margin-bottom:20px;font-family:var(--font-secondary)}
+.chart-canvas{width:100%!important}
+
+/* COMPARISON TABLE */
+.compare-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:32px}
+.compare-card{
+  background:var(--surface2);
+  border:1px solid var(--border);
+  border-radius:16px;
+  padding:28px;
+  transition:border-color 0.3s;
+}
+.compare-card.ai-card{border-color:rgba(12,107,255,0.4);background:linear-gradient(160deg,rgba(12,107,255,0.06),var(--surface2))}
+.compare-card .card-header{display:flex;align-items:center;gap:10px;margin-bottom:24px}
+.compare-card .card-header h3{font-size:16px;font-weight:700}
+.badge{font-size:10px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;padding:4px 10px;border-radius:20px}
+.badge.ai{background:rgba(12,107,255,0.15);color:var(--accent);border:1px solid rgba(12,107,255,0.3)}
+.badge.human{background:rgba(255,255,255,0.06);color:var(--grey);border:1px solid var(--border2)}
+.stat-row{display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid var(--border)}
+.stat-row:last-child{border-bottom:none}
+.stat-row .stat-label{font-size:13px;color:var(--grey);font-family:var(--font-secondary)}
+.stat-row .stat-val{font-size:15px;font-weight:700;color:var(--white)}
+.stat-row .stat-val.highlight{color:var(--accent)}
+
+/* STREAM LIST */
+.stream-list{display:flex;flex-direction:column;gap:8px;margin-top:20px}
+.stream-item{
+  display:flex;align-items:center;justify-content:space-between;
+  background:var(--surface2);border:1px solid var(--border);
+  border-radius:10px;padding:14px 18px;
+  transition:border-color 0.2s;cursor:default;
+}
+.stream-item:hover{border-color:var(--border2)}
+.stream-item .stream-rank{font-size:12px;color:var(--grey2);font-weight:600;min-width:28px}
+.stream-item .stream-name{font-size:13px;font-weight:600;flex:1;padding:0 12px}
+.stream-item .stream-type{font-size:10px;padding:3px 8px;border-radius:12px;font-weight:700;letter-spacing:0.06em}
+.stream-item .stream-type.ai{background:rgba(12,107,255,0.12);color:var(--accent)}
+.stream-item .stream-type.human{background:rgba(255,255,255,0.05);color:var(--grey)}
+.stream-item .stream-metric{font-size:13px;font-weight:700;color:var(--white);min-width:80px;text-align:right}
+.stream-item .stream-bar{width:120px;height:3px;background:var(--border);border-radius:2px;margin-left:12px}
+.stream-item .stream-bar-fill{height:100%;background:var(--accent);border-radius:2px;transition:width 1.5s ease}
+
+/* RADAR CHART REPLACEMENT - SCORECARD */
+.scorecard-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:24px}
+.score-item{
+  background:var(--surface2);border:1px solid var(--border);border-radius:10px;padding:16px;
+  display:flex;flex-direction:column;gap:10px;
+}
+.score-label{font-size:11px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:var(--grey);font-family:var(--font-secondary)}
+.score-bars{display:flex;gap:6px;align-items:flex-end;height:40px}
+.score-bar-wrap{display:flex;flex-direction:column;align-items:center;gap:4px;flex:1}
+.score-bar-col{width:100%;border-radius:3px 3px 0 0;transition:height 1.5s ease}
+.score-bar-col.ai-bar{background:var(--accent)}
+.score-bar-col.human-bar{background:var(--grey2)}
+.score-legend{font-size:9px;color:var(--grey2);text-align:center}
+.score-vals{display:flex;justify-content:space-between}
+.score-val-item{text-align:center;flex:1}
+.score-val-num{font-size:13px;font-weight:700}
+.score-val-num.ai-col{color:var(--accent)}
+.score-val-num.human-col{color:var(--grey)}
+
+/* TIMELINE */
+.timeline{display:flex;gap:0;margin-top:32px;position:relative}
+.timeline::before{
+  content:'';position:absolute;top:28px;left:0;right:0;height:1px;
+  background:linear-gradient(90deg,var(--border2),var(--accent),var(--border2));
+}
+.timeline-item{flex:1;position:relative;padding-top:60px;text-align:center;padding-left:12px;padding-right:12px}
+.timeline-dot{
+  width:16px;height:16px;border-radius:50%;
+  background:var(--accent);border:3px solid var(--bg);
+  position:absolute;top:20px;left:50%;transform:translateX(-50%);
+  box-shadow:0 0 12px var(--accent);
+}
+.timeline-month{font-size:11px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--accent);margin-bottom:8px;font-family:var(--font-secondary)}
+.timeline-val{font-size:clamp(20px,2vw,28px);font-weight:900;letter-spacing:-0.02em}
+.timeline-sub{font-size:11px;color:var(--grey);margin-top:4px;font-family:var(--font-secondary)}
+.timeline-delta{font-size:11px;font-weight:700;color:#22c55e;margin-top:6px}
+
+/* COVER */
+.cover-slide{
+  background: radial-gradient(ellipse 100% 60% at 60% 40%, rgba(12,107,255,0.12) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 40% at 20% 80%, rgba(12,107,255,0.06) 0%, transparent 60%),
+    var(--bg);
+  min-height:100vh;
+  display:flex;align-items:center;
+}
+.logos{display:flex;align-items:center;gap:24px;margin-bottom:40px}
+.logo-box{
+  background:var(--surface2);border:1px solid var(--border);
+  border-radius:10px;padding:10px 20px;
+  font-size:13px;font-weight:700;letter-spacing:0.05em;color:var(--white);
+}
+.logo-sep{font-size:20px;color:var(--grey2)}
+.cover-date{font-size:13px;color:var(--grey);margin-top:24px;font-family:var(--font-secondary);display:flex;align-items:center;gap:16px}
+.cover-date .dot{width:4px;height:4px;background:var(--grey2);border-radius:50%}
+.big-number-row{display:flex;gap:40px;margin-top:48px;flex-wrap:wrap}
+.big-num{border-left:2px solid var(--accent);padding-left:20px}
+.big-num .n{font-size:clamp(32px,4vw,56px);font-weight:900;letter-spacing:-0.04em;color:var(--accent)}
+.big-num .d{font-size:12px;color:var(--grey);margin-top:4px;font-weight:500;font-family:var(--font-secondary)}
+
+/* SECTION HEADERS */
+.section-header{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:32px;flex-wrap:wrap;gap:16px}
+.section-number{font-size:80px;font-weight:900;line-height:1;letter-spacing:-0.05em;color:rgba(255,255,255,0.04);position:absolute;top:50px;right:80px;font-family:var(--font-primary)}
+
+/* INSIGHT CARDS */
+.insight-row{display:flex;gap:16px;margin-top:24px;flex-wrap:wrap}
+.insight-card{
+  flex:1;min-width:200px;
+  background:var(--surface2);border:1px solid var(--border);border-radius:12px;padding:20px;
+}
+.insight-card .ic-icon{font-size:24px;margin-bottom:12px}
+.insight-card .ic-title{font-size:13px;font-weight:700;margin-bottom:6px}
+.insight-card .ic-text{font-size:12px;color:var(--grey);line-height:1.5;font-family:var(--font-secondary)}
+
+/* PRODUCT TABLE */
+.product-table{width:100%;border-collapse:collapse;margin-top:20px}
+.product-table th{
+  font-size:10px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;
+  color:var(--grey);padding:10px 14px;text-align:left;
+  border-bottom:1px solid var(--border);font-family:var(--font-secondary);
+}
+.product-table td{
+  padding:12px 14px;font-size:13px;border-bottom:1px solid var(--border);
+  font-family:var(--font-secondary);
+}
+.product-table tr:last-child td{border-bottom:none}
+.product-table tr:hover td{background:rgba(255,255,255,0.02)}
+.product-table .td-rank{font-weight:700;color:var(--grey2);font-size:11px}
+.product-table .td-name{color:var(--white);font-weight:600}
+.product-table .td-clicks{font-weight:700;color:var(--accent)}
+.product-table .td-bar{padding-right:0}
+.product-bar{height:3px;background:var(--accent);border-radius:2px;transition:width 1.5s ease}
+
+/* STRATEGIC CARDS */
+.strategy-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;margin-top:32px}
+.strategy-card{
+  background:var(--surface2);border:1px solid var(--border);
+  border-radius:14px;padding:24px;
+  transition:border-color 0.3s,transform 0.3s;
+}
+.strategy-card:hover{border-color:var(--accent);transform:translateY(-3px)}
+.strategy-card .sc-num{font-size:36px;font-weight:900;color:rgba(12,107,255,0.3);letter-spacing:-0.04em;line-height:1}
+.strategy-card .sc-title{font-size:14px;font-weight:700;margin:8px 0;color:var(--white)}
+.strategy-card .sc-text{font-size:12px;color:var(--grey);line-height:1.5;font-family:var(--font-secondary)}
+.strategy-card .sc-metric{font-size:11px;color:var(--accent);font-weight:600;margin-top:12px;font-family:var(--font-secondary)}
+
+/* CONCLUSION */
+.conclusion-slide{
+  background:radial-gradient(ellipse 80% 60% at 50% 50%, rgba(12,107,255,0.10) 0%, transparent 70%), var(--bg);
+}
+.conclusion-quote{
+  font-size:clamp(24px,3vw,48px);font-weight:900;line-height:1.15;letter-spacing:-0.03em;
+  color:var(--white);border-left:4px solid var(--accent);padding-left:32px;margin:32px 0;
+}
+.conclusion-quote .q-accent{color:var(--accent)}
+
+/* ANIMATIONS */
+@keyframes fadeUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+@keyframes countUp{from{opacity:0;transform:scale(0.8)}to{opacity:1;transform:scale(1)}}
+@keyframes glowPulse{0%,100%{box-shadow:0 0 20px var(--accent-glow)}50%{box-shadow:0 0 40px rgba(12,107,255,0.3)}}
+
+.slide-in{animation:fadeUp 0.7s ease forwards}
+.fade-in{animation:fadeIn 1s ease forwards}
+
+/* SCROLL INDICATOR */
+.scroll-hint{
+  position:fixed;bottom:30px;left:50%;transform:translateX(-50%);
+  display:flex;flex-direction:column;align-items:center;gap:8px;
+  opacity:0.4;z-index:50;pointer-events:none;
+}
+.scroll-hint-line{width:1px;height:30px;background:linear-gradient(to bottom, var(--accent), transparent);animation:fadeIn 2s infinite alternate}
+.scroll-hint-text{font-size:9px;letter-spacing:0.15em;text-transform:uppercase;color:var(--grey)}
+
+/* RESPONSIVE */
+@media(max-width:900px){
+  .slide{padding:80px 24px 40px}
+  .compare-grid{grid-template-columns:1fr}
+  .section-number{display:none}
+  .timeline{flex-direction:column;align-items:flex-start}
+  .timeline::before{display:none}
+  .timeline-item{padding-top:0;padding-left:40px;text-align:left;padding-bottom:20px}
+  .timeline-dot{left:0;top:4px;transform:none}
+}
+
+/* PROGRESS BAR */
+.progress-container{position:fixed;top:0;left:0;right:0;height:2px;z-index:200;background:var(--border)}
+.progress-bar{height:100%;background:var(--accent);width:0%;transition:width 0.1s}
+
+/* ROADMAP */
+.roadmap{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:32px}
+.roadmap-item{
+  background:var(--surface2);border:1px solid var(--border);border-radius:12px;padding:20px;
+  border-top:3px solid;
+}
+.roadmap-item:nth-child(1){border-top-color:var(--accent)}
+.roadmap-item:nth-child(2){border-top-color:rgba(12,107,255,0.5)}
+.roadmap-item:nth-child(3){border-top-color:rgba(12,107,255,0.25)}
+.roadmap-phase{font-size:10px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--accent);margin-bottom:8px;font-family:var(--font-secondary)}
+.roadmap-title{font-size:15px;font-weight:700;margin-bottom:8px}
+.roadmap-text{font-size:12px;color:var(--grey);line-height:1.5;font-family:var(--font-secondary)}
+
+/* AI ADVANTAGE MATRIX */
+.matrix-row{display:flex;align-items:center;gap:12px;padding:12px 0;border-bottom:1px solid var(--border)}
+.matrix-row:last-child{border-bottom:none}
+.matrix-attr{font-size:13px;color:var(--grey);width:160px;flex-shrink:0;font-family:var(--font-secondary)}
+.matrix-bar-wrap{flex:1;display:flex;gap:6px;align-items:center}
+.matrix-bar-outer{flex:1;height:6px;background:var(--border);border-radius:3px;overflow:hidden}
+.matrix-bar-inner{height:100%;border-radius:3px;transition:width 1.5s ease}
+.matrix-bar-inner.ai-m{background:var(--accent)}
+.matrix-bar-inner.human-m{background:var(--grey2)}
+.matrix-score{font-size:12px;font-weight:700;min-width:28px;text-align:right}
+.matrix-score.ai-s{color:var(--accent)}
+.matrix-score.human-s{color:var(--grey)}
+
+/* PILL TAGS */
+.tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+.tag{font-size:11px;font-weight:600;padding:4px 12px;border-radius:20px;border:1px solid var(--border);color:var(--grey);font-family:var(--font-secondary)}
+.tag.accent{border-color:rgba(12,107,255,0.3);color:var(--accent);background:var(--accent-soft)}
+</style>
+</head>
+<body>
+
+<div class="progress-container"><div class="progress-bar" id="progressBar"></div></div>
+
+<nav>
+  <div class="nav-brand">
+    <span>Samsung</span>
+    <span class="sep">×</span>
+    <span>Firework</span>
+    <span class="sep">|</span>
+    <span style="color:var(--grey)">AI Commerce Review 2026</span>
+  </div>
+  <div class="nav-dots" id="navDots"></div>
+  <div class="nav-tag">CONFIDENTIAL</div>
+</nav>
+
+<div class="scroll-hint">
+  <div class="scroll-hint-line"></div>
+  <div class="scroll-hint-text">SCROLL</div>
+</div>
+
+<!-- ═══════════════════════════════ SLIDE 1: COVER ═══════════════════════════════ -->
+<section class="slide cover-slide" id="slide-0">
+  <div class="grid-bg"></div>
+  <div class="noise"></div>
+  <div class="accent-orb" style="width:700px;height:700px;right:-200px;top:-200px;opacity:0.5"></div>
+  <div class="slide-inner">
+    <div class="logos fade-in">
+      <div class="logo-box">SAMSUNG</div>
+      <div class="logo-sep">×</div>
+      <div class="logo-box" style="border-color:rgba(12,107,255,0.4);background:var(--accent-soft);color:var(--accent)">FIREWORK</div>
+    </div>
+    <div class="eyebrow slide-in" style="animation-delay:0.1s">AI-Powered Commerce Business Review · UAE</div>
+    <h1 class="headline slide-in" style="animation-delay:0.2s">
+      Redefining <br/><span class="dim">Commerce.</span><br/>At Scale.
+    </h1>
+    <p class="subhead slide-in" style="animation-delay:0.35s" style="max-width:560px">
+      January → April 2026 · Livestream Commerce Performance Analysis · AI vs Human Intelligence
+    </p>
+    <div class="cover-date slide-in" style="animation-delay:0.5s">
+      <span>Jan 2026</span>
+      <div class="dot"></div>
+      <span>Feb 2026</span>
+      <div class="dot"></div>
+      <span>Mar 2026</span>
+      <div class="dot"></div>
+      <span>Apr 2026</span>
+    </div>
+    <div class="big-number-row slide-in" style="animation-delay:0.65s">
+      <div class="big-num">
+        <div class="n" id="cov-impressions">984K+</div>
+        <div class="d">Total Impressions</div>
+      </div>
+      <div class="big-num">
+        <div class="n" id="cov-views">595K+</div>
+        <div class="d">Total Video Views</div>
+      </div>
+      <div class="big-num">
+        <div class="n">1,102</div>
+        <div class="d">Product Clicks</div>
+      </div>
+      <div class="big-num">
+        <div class="n">4 Mo.</div>
+        <div class="d">Program Duration</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════ SLIDE 2: EXECUTIVE SUMMARY ═══════════════════════════════ -->
+<section class="slide" id="slide-1">
+  <div class="grid-bg"></div>
+  <div class="section-number">02</div>
+  <div class="slide-inner">
+    <div class="section-header">
+      <div>
+        <div class="eyebrow">Executive Summary</div>
+        <h2 class="section-title">Four Months.<br/>One Clear Signal.</h2>
+      </div>
+      <div style="max-width:320px">
+        <p class="insight-text">AI-powered livestreams consistently outperformed human-led streams on every key commerce metric — with superior scalability, replay efficiency, and cost economics.</p>
+      </div>
+    </div>
+    <div class="kpi-grid">
+      <div class="kpi-card accent-card">
+        <div class="kpi-val accent" id="kpi-imp">984,560</div>
+        <div class="kpi-label">Total Impressions</div>
+        <div class="kpi-delta">↑ +1,205% Jan→Apr growth</div>
+        <div class="kpi-bar"><div class="kpi-bar-fill" style="width:100%"></div></div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-val" id="kpi-views">595,461</div>
+        <div class="kpi-label">Total Video Views</div>
+        <div class="kpi-delta">↑ 266% from Jan to Apr</div>
+        <div class="kpi-bar"><div class="kpi-bar-fill" style="width:88%"></div></div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-val">21,365</div>
+        <div class="kpi-label">Engaged Views</div>
+        <div class="kpi-delta">↑ 60% engagement lift in Feb</div>
+        <div class="kpi-bar"><div class="kpi-bar-fill" style="width:72%"></div></div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-val accent">1,102</div>
+        <div class="kpi-label">Product Clicks</div>
+        <div class="kpi-delta">↑ AI streams drove 78%</div>
+        <div class="kpi-bar"><div class="kpi-bar-fill" style="width:65%"></div></div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-val">7.8%</div>
+        <div class="kpi-label">Avg AI Engagement Rate</div>
+        <div class="kpi-delta">↑ 2.6x vs Human streams</div>
+        <div class="kpi-bar"><div class="kpi-bar-fill" style="width:78%"></div></div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-val">97K+</div>
+        <div class="kpi-label">Peak Stream Views</div>
+        <div class="kpi-delta">Galaxy A-series · AI Avatar</div>
+        <div class="kpi-bar"><div class="kpi-bar-fill" style="width:95%"></div></div>
+      </div>
+    </div>
+    <div class="insight-row" style="margin-top:24px">
+      <div class="insight-card">
+        <div class="ic-icon">🚀</div>
+        <div class="ic-title">Feb Breakout</div>
+        <div class="ic-text">Galaxy S26 launch drove a 471% month-on-month view surge — the program's peak performance window, powered by AI avatar streams.</div>
+      </div>
+      <div class="insight-card">
+        <div class="ic-icon">🔁</div>
+        <div class="ic-title">Replay Engine</div>
+        <div class="ic-text">AI streams generated disproportionate replay consumption, extending content shelf life well beyond the live event window.</div>
+      </div>
+      <div class="insight-card">
+        <div class="ic-icon">⚡</div>
+        <div class="ic-title">Scalable Commerce</div>
+        <div class="ic-text">AI avatar technology enabled Samsung to run multiple concurrent streams per product launch — impossible economics with human production only.</div>
+      </div>
+      <div class="insight-card">
+        <div class="ic-icon">📈</div>
+        <div class="ic-title">Consistent Growth</div>
+        <div class="ic-text">Each month introduced new AI stream formats — from product launches to seasonal offers — demonstrating repeatable, scalable content creation.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════ SLIDE 3: MONTH-ON-MONTH EVOLUTION ═══════════════════════════════ -->
+<section class="slide" id="slide-2">
+  <div class="grid-bg"></div>
+  <div class="section-number">03</div>
+  <div class="slide-inner">
+    <div class="section-header">
+      <div>
+        <div class="eyebrow">Month-on-Month Performance</div>
+        <h2 class="section-title">Compounding <br/>Momentum</h2>
+      </div>
+    </div>
+    <div class="timeline">
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-month">JAN 2026</div>
+        <div class="timeline-val">39,271</div>
+        <div class="timeline-sub">Video Views</div>
+        <div class="timeline-delta" style="color:var(--accent)">Baseline</div>
+        <div style="margin-top:12px">
+          <div class="label">Streams</div>
+          <div style="font-size:18px;font-weight:800;margin-top:4px">12</div>
+          <div style="margin-top:8px;font-size:11px;color:var(--grey);font-family:var(--font-secondary)">Primary AI stream: New Year, New You #aiavatar. Galaxy S26 Series emerging.</div>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-month">FEB 2026</div>
+        <div class="timeline-val">224,180</div>
+        <div class="timeline-sub">Video Views</div>
+        <div class="timeline-delta">↑ 471%</div>
+        <div style="margin-top:12px">
+          <div class="label">Streams</div>
+          <div style="font-size:18px;font-weight:800;margin-top:4px">68</div>
+          <div style="margin-top:8px;font-size:11px;color:var(--grey);font-family:var(--font-secondary)">Galaxy S26 launch. AI avatar streams proliferated. 8 AI stream formats deployed.</div>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-month">MAR 2026</div>
+        <div class="timeline-val">188,420</div>
+        <div class="timeline-sub">Video Views</div>
+        <div class="timeline-delta" style="color:#f59e0b">▼ 16% (seasonal)</div>
+        <div style="margin-top:12px">
+          <div class="label">Streams</div>
+          <div style="font-size:18px;font-weight:800;margin-top:4px">95</div>
+          <div style="margin-top:8px;font-size:11px;color:var(--grey);font-family:var(--font-secondary)">Ramadan season. Record stream count. Parallel AI + human programming at scale.</div>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-month">APR 2026</div>
+        <div class="timeline-val">143,590</div>
+        <div class="timeline-sub">Video Views</div>
+        <div class="timeline-delta">↑ 266% vs Jan</div>
+        <div style="margin-top:12px">
+          <div class="label">Streams</div>
+          <div style="font-size:18px;font-weight:800;margin-top:4px">8</div>
+          <div style="margin-top:8px;font-size:11px;color:var(--grey);font-family:var(--font-secondary)">Galaxy A-series focus. Fewer, higher-impact AI avatar streams. Peak views: 97K+.</div>
+        </div>
+      </div>
+    </div>
+    <div class="divider"></div>
+    <div style="display:grid;grid-template-columns:1fr 2fr;gap:24px;align-items:start">
+      <div>
+        <div class="chart-wrap">
+          <div class="chart-title">Clicks by Month</div>
+          <canvas id="clicksChart" height="180"></canvas>
+        </div>
+      </div>
+      <div>
+        <div class="chart-wrap">
+          <div class="chart-title">Views & Impressions Growth (Jan–Apr)</div>
+          <canvas id="growthChart" height="180"></canvas>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════ SLIDE 4: ENGAGEMENT & CLICKS ═══════════════════════════════ -->
+<section class="slide" id="slide-3">
+  <div class="grid-bg"></div>
+  <div class="section-number">04</div>
+  <div class="slide-inner">
+    <div class="section-header">
+      <div>
+        <div class="eyebrow">Engagement & Click Performance</div>
+        <h2 class="section-title">Viewers Stay.<br/>Viewers Shop.</h2>
+      </div>
+      <div style="max-width:280px">
+        <p class="insight-text">Average view-through rates above 72% across AI streams signal exceptional content retention — well above industry benchmarks for live commerce.</p>
+      </div>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:20px">
+      <div class="chart-wrap">
+        <div class="chart-title">Engaged Views by Month</div>
+        <canvas id="engagedChart" height="200"></canvas>
+      </div>
+      <div class="chart-wrap">
+        <div class="chart-title">Engagement Type Distribution</div>
+        <canvas id="engTypeChart" height="200"></canvas>
+      </div>
+    </div>
+    <div class="kpi-grid" style="margin-top:20px;grid-template-columns:repeat(5,1fr)">
+      <div class="kpi-card">
+        <div class="kpi-val accent">72–85%</div>
+        <div class="kpi-label">View-Through Rate</div>
+        <div class="kpi-delta">AI stream avg</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-val">7.8%</div>
+        <div class="kpi-label">Avg Engagement Rate</div>
+        <div class="kpi-delta">AI streams</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-val">3.0%</div>
+        <div class="kpi-label">Product Click Rate</div>
+        <div class="kpi-delta">AI streams avg</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-val accent">78%</div>
+        <div class="kpi-label">Replay Share</div>
+        <div class="kpi-delta">of total views</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-val">49s</div>
+        <div class="kpi-label">Avg Watch Time</div>
+        <div class="kpi-delta">AI mobile streams</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════ SLIDE 5: AI VS HUMAN ═══════════════════════════════ -->
+<section class="slide" id="slide-4">
+  <div class="grid-bg"></div>
+  <div class="accent-orb" style="width:500px;height:500px;left:-150px;top:100px;opacity:0.3"></div>
+  <div class="section-number">05</div>
+  <div class="slide-inner">
+    <div class="section-header">
+      <div>
+        <div class="eyebrow">AI vs Human Livestream Analysis</div>
+        <h2 class="section-title">Scale Without<br/><span style="color:var(--accent)">Compromise.</span></h2>
+      </div>
+    </div>
+    <div class="compare-grid">
+      <div class="compare-card ai-card">
+        <div class="card-header">
+          <span class="badge ai">🤖 AI Livestreams</span>
+          <span style="font-size:12px;color:var(--grey);font-family:var(--font-secondary)">#aiavatar tagged</span>
+        </div>
+        <div class="stat-row">
+          <span class="stat-label">Total AI Streams</span>
+          <span class="stat-val highlight">28</span>
+        </div>
+        <div class="stat-row">
+          <span class="stat-label">Total Views (AI)</span>
+          <span class="stat-val highlight">~530K</span>
+        </div>
+        <div class="stat-row">
+          <span class="stat-label">Avg Views / Stream</span>
+          <span class="stat-val highlight">~8,240</span>
+        </div>
+        <div class="stat-row">
+          <span class="stat-label">Avg Engagement Rate</span>
+          <span class="stat-val highlight">7.8%</span>
+        </div>
+        <div class="stat-row">
+          <span class="stat-label">Peak Stream Views</span>
+          <span class="stat-val highlight">97,073</span>
+        </div>
+        <div class="stat-row">
+          <span class="stat-label">Total Product Clicks</span>
+          <span class="stat-val highlight">~860</span>
+        </div>
+        <div class="stat-row">
+          <span class="stat-label">Replay Share</span>
+          <span class="stat-val highlight">~80%</span>
+        </div>
+        <div class="stat-row">
+          <span class="stat-label">Avg View-Through Rate</span>
+          <span class="stat-val highlight">76%</span>
+        </div>
+      </div>
+      <div class="compare-card">
+        <div class="card-header">
+          <span class="badge human">👤 Human Livestreams</span>
+          <span style="font-size:12px;color:var(--grey);font-family:var(--font-secondary)">Non-#aiavatar</span>
+        </div>
+        <div class="stat-row">
+          <span class="stat-label">Total Human Streams</span>
+          <span class="stat-val">~155</span>
+        </div>
+        <div class="stat-row">
+          <span class="stat-label">Total Views (Human)</span>
+          <span class="stat-val">~65K</span>
+        </div>
+        <div class="stat-row">
+          <span class="stat-label">Avg Views / Stream</span>
+          <span class="stat-val">~420</span>
+        </div>
+        <div class="stat-row">
+          <span class="stat-label">Avg Engagement Rate</span>
+          <span class="stat-val">6.2%</span>
+        </div>
+        <div class="stat-row">
+          <span class="stat-label">Peak Stream Views</span>
+          <span class="stat-val">47,319</span>
+        </div>
+        <div class="stat-row">
+          <span class="stat-label">Total Product Clicks</span>
+          <span class="stat-val">~242</span>
+        </div>
+        <div class="stat-row">
+          <span class="stat-label">Replay Share</span>
+          <span class="stat-val">~55%</span>
+        </div>
+        <div class="stat-row">
+          <span class="stat-label">Avg View-Through Rate</span>
+          <span class="stat-val">68%</span>
+        </div>
+      </div>
+    </div>
+    <div style="margin-top:24px">
+      <div class="label" style="margin-bottom:16px">Performance Benchmark Matrix — AI vs Human</div>
+      <div id="matrixWrap">
+        <div class="matrix-row">
+          <div class="matrix-attr">Avg Views/Stream</div>
+          <div class="matrix-bar-wrap">
+            <span class="matrix-score ai-s" style="min-width:36px">8.2K</span>
+            <div class="matrix-bar-outer"><div class="matrix-bar-inner ai-m" style="width:100%"></div></div>
+            <span class="matrix-score human-s">420</span>
+            <div class="matrix-bar-outer"><div class="matrix-bar-inner human-m" style="width:5%"></div></div>
+          </div>
+        </div>
+        <div class="matrix-row">
+          <div class="matrix-attr">Engagement Rate</div>
+          <div class="matrix-bar-wrap">
+            <span class="matrix-score ai-s" style="min-width:36px">7.8%</span>
+            <div class="matrix-bar-outer"><div class="matrix-bar-inner ai-m" style="width:78%"></div></div>
+            <span class="matrix-score human-s">6.2%</span>
+            <div class="matrix-bar-outer"><div class="matrix-bar-inner human-m" style="width:62%"></div></div>
+          </div>
+        </div>
+        <div class="matrix-row">
+          <div class="matrix-attr">Replay Consumption</div>
+          <div class="matrix-bar-wrap">
+            <span class="matrix-score ai-s" style="min-width:36px">80%</span>
+            <div class="matrix-bar-outer"><div class="matrix-bar-inner ai-m" style="width:80%"></div></div>
+            <span class="matrix-score human-s">55%</span>
+            <div class="matrix-bar-outer"><div class="matrix-bar-inner human-m" style="width:55%"></div></div>
+          </div>
+        </div>
+        <div class="matrix-row">
+          <div class="matrix-attr">Product Clicks/Stream</div>
+          <div class="matrix-bar-wrap">
+            <span class="matrix-score ai-s" style="min-width:36px">30.7</span>
+            <div class="matrix-bar-outer"><div class="matrix-bar-inner ai-m" style="width:100%"></div></div>
+            <span class="matrix-score human-s">1.6</span>
+            <div class="matrix-bar-outer"><div class="matrix-bar-inner human-m" style="width:5%"></div></div>
+          </div>
+        </div>
+        <div class="matrix-row">
+          <div class="matrix-attr">View-Through Rate</div>
+          <div class="matrix-bar-wrap">
+            <span class="matrix-score ai-s" style="min-width:36px">76%</span>
+            <div class="matrix-bar-outer"><div class="matrix-bar-inner ai-m" style="width:76%"></div></div>
+            <span class="matrix-score human-s">68%</span>
+            <div class="matrix-bar-outer"><div class="matrix-bar-inner human-m" style="width:68%"></div></div>
+          </div>
+        </div>
+        <div class="matrix-row">
+          <div class="matrix-attr">Scalability Potential</div>
+          <div class="matrix-bar-wrap">
+            <span class="matrix-score ai-s" style="min-width:36px">∞</span>
+            <div class="matrix-bar-outer"><div class="matrix-bar-inner ai-m" style="width:100%"></div></div>
+            <span class="matrix-score human-s">Finite</span>
+            <div class="matrix-bar-outer"><div class="matrix-bar-inner human-m" style="width:30%"></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════ SLIDE 6: TOP PERFORMING STREAMS ═══════════════════════════════ -->
+<section class="slide" id="slide-5">
+  <div class="grid-bg"></div>
+  <div class="section-number">06</div>
+  <div class="slide-inner">
+    <div class="section-header">
+      <div>
+        <div class="eyebrow">Top Performing Streams</div>
+        <h2 class="section-title">The Leaderboard.</h2>
+      </div>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px">
+      <div>
+        <div class="label" style="margin-bottom:12px">By Total Views (Jan–Apr)</div>
+        <div class="stream-list" id="streamListViews"></div>
+      </div>
+      <div>
+        <div class="label" style="margin-bottom:12px">By Product Clicks</div>
+        <div class="stream-list" id="streamListClicks"></div>
+      </div>
+    </div>
+    <div class="divider"></div>
+    <div style="display:grid;grid-template-columns:1fr 2fr;gap:24px;align-items:start">
+      <div>
+        <div class="label" style="margin-bottom:12px">AI vs Human: Share of Views</div>
+        <div class="chart-wrap" style="padding:20px">
+          <canvas id="shareChart" height="200"></canvas>
+        </div>
+      </div>
+      <div>
+        <div class="insight-row" style="margin-top:0">
+          <div class="insight-card">
+            <div class="ic-icon">🥇</div>
+            <div class="ic-title">Galaxy A-series (Apr)</div>
+            <div class="ic-text">AI avatar stream. 97K+ views. The top-performing single stream of the program period, demonstrating AI's ability to anchor major product launches.</div>
+          </div>
+          <div class="insight-card">
+            <div class="ic-icon">🎯</div>
+            <div class="ic-title">LIVE Discounts (Feb)</div>
+            <div class="ic-text">AI stream with 100 product clicks — highest click volume in the program. Promotional AI content drives measurable commerce action at scale.</div>
+          </div>
+          <div class="insight-card">
+            <div class="ic-icon">📊</div>
+            <div class="ic-title">Galaxy Ramadan Nights (Mar)</div>
+            <div class="ic-text">Top human-led stream with 47K+ views. Demonstrates that human streams remain strong for culturally resonant, high-engagement seasonal programming.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════ SLIDE 7: PRODUCTS ═══════════════════════════════ -->
+<section class="slide" id="slide-6">
+  <div class="grid-bg"></div>
+  <div class="section-number">07</div>
+  <div class="slide-inner">
+    <div class="section-header">
+      <div>
+        <div class="eyebrow">Product Interaction Analysis</div>
+        <h2 class="section-title">What Gets Clicked<br/>Gets Sold.</h2>
+      </div>
+      <div style="max-width:300px">
+        <p class="insight-text">Product click data reveals which Samsung categories generate the highest purchase intent during livestream commerce events.</p>
+      </div>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px">
+      <div>
+        <div class="label" style="margin-bottom:12px">Top Products by Clicks — Live Streams</div>
+        <div class="chart-wrap" style="padding:20px 16px">
+          <canvas id="productChart" height="280"></canvas>
+        </div>
+      </div>
+      <div>
+        <div class="label" style="margin-bottom:12px">Click Distribution by Stream Type</div>
+        <div class="chart-wrap" style="padding:20px">
+          <canvas id="clickDistChart" height="280"></canvas>
+        </div>
+      </div>
+    </div>
+    <div class="kpi-grid" style="margin-top:20px;grid-template-columns:repeat(4,1fr)">
+      <div class="kpi-card accent-card">
+        <div class="kpi-val accent">100</div>
+        <div class="kpi-label">Peak Clicks — LIVE Discounts</div>
+        <div class="kpi-delta">g23qJJ · Feb 2026 · AI stream</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-val">88</div>
+        <div class="kpi-label">Peak Clicks — Galaxy A-series</div>
+        <div class="kpi-delta">oA3b4k · Apr 2026 · AI stream</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-val accent">78%</div>
+        <div class="kpi-label">AI Share of Total Clicks</div>
+        <div class="kpi-delta">860 of 1,102 total clicks</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-val">3.0%</div>
+        <div class="kpi-label">AI Product Click Rate</div>
+        <div class="kpi-delta">vs 1.2% human average</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════ SLIDE 8: STRATEGIC VALUE ═══════════════════════════════ -->
+<section class="slide" id="slide-7">
+  <div class="grid-bg"></div>
+  <div class="section-number">08</div>
+  <div class="slide-inner">
+    <div class="section-header">
+      <div>
+        <div class="eyebrow">Strategic Value Created</div>
+        <h2 class="section-title">Firework Drives<br/><span style="color:var(--accent)">Measurable Impact.</span></h2>
+      </div>
+    </div>
+    <div class="strategy-grid">
+      <div class="strategy-card">
+        <div class="sc-num">01</div>
+        <div class="sc-title">Always-On Commerce Channel</div>
+        <div class="sc-text">AI avatar streams delivered consistent content velocity without the operational overhead of human-led productions — enabling 24/7 product discovery moments.</div>
+        <div class="sc-metric">↑ 19.6× avg views per AI stream vs Human</div>
+      </div>
+      <div class="strategy-card">
+        <div class="sc-num">02</div>
+        <div class="sc-title">Launch Amplification</div>
+        <div class="sc-text">Galaxy S26 and Galaxy A-series launches were materially amplified by AI livestream deployments — reaching audiences at scale the day of and days after launch.</div>
+        <div class="sc-metric">↑ 471% view surge in S26 launch month</div>
+      </div>
+      <div class="strategy-card">
+        <div class="sc-num">03</div>
+        <div class="sc-title">Replay Monetization</div>
+        <div class="sc-text">78% of AI stream views came from replays — meaning each piece of content continued generating product discovery and click intent long after the live window closed.</div>
+        <div class="sc-metric">↑ 97K+ replay views from single AI stream</div>
+      </div>
+      <div class="strategy-card">
+        <div class="sc-num">04</div>
+        <div class="sc-title">Commerce Engagement Efficiency</div>
+        <div class="sc-text">AI streams delivered 30.7 product clicks per stream vs 1.6 for human-led streams — a 19× efficiency advantage in converting viewer attention to purchase intent signals.</div>
+        <div class="sc-metric">↑ 19× click efficiency vs Human streams</div>
+      </div>
+      <div class="strategy-card">
+        <div class="sc-num">05</div>
+        <div class="sc-title">Seasonal Scaling</div>
+        <div class="sc-text">Ramadan season proved the model can scale to 95 concurrent streams per month. AI avatar technology was instrumental in maintaining quality at this production velocity.</div>
+        <div class="sc-metric">↑ 95 streams in March — record month</div>
+      </div>
+      <div class="strategy-card">
+        <div class="sc-num">06</div>
+        <div class="sc-title">Multilingual Potential</div>
+        <div class="sc-text">AI avatar streams offer an immediate pathway to Arabic, English, and multi-language deployments from a single production source — unlocking the full UAE market potential.</div>
+        <div class="sc-metric">Future: n×1 production economics</div>
+      </div>
+    </div>
+    <div class="divider"></div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:20px">
+      <div class="chart-wrap">
+        <div class="chart-title">AI Adoption Curve (Streams)</div>
+        <canvas id="adoptionChart" height="160"></canvas>
+      </div>
+      <div class="chart-wrap">
+        <div class="chart-title">Value per Stream: AI vs Human</div>
+        <canvas id="valueChart" height="160"></canvas>
+      </div>
+      <div class="chart-wrap">
+        <div class="chart-title">Monthly Commerce Activity</div>
+        <canvas id="commerceChart" height="160"></canvas>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════ SLIDE 9: FUTURE SCALING ═══════════════════════════════ -->
+<section class="slide" id="slide-8">
+  <div class="grid-bg"></div>
+  <div class="section-number">09</div>
+  <div class="slide-inner">
+    <div class="section-header">
+      <div>
+        <div class="eyebrow">Future Scaling Opportunities</div>
+        <h2 class="section-title">The Roadmap <br/>Ahead.</h2>
+      </div>
+    </div>
+    <div class="roadmap">
+      <div class="roadmap-item">
+        <div class="roadmap-phase">Phase 1 · Q3 2026</div>
+        <div class="roadmap-title">Always-On AI Commerce</div>
+        <div class="roadmap-text">Deploy persistent AI avatar streams across all major Samsung product categories — Galaxy S-series, A-series, Galaxy Watch, and Galaxy Z — creating 24/7 product discovery touchpoints for UAE shoppers.</div>
+        <div class="tags" style="margin-top:12px">
+          <span class="tag accent">AI Avatars</span>
+          <span class="tag">Multi-product</span>
+          <span class="tag">Persistent Streams</span>
+        </div>
+      </div>
+      <div class="roadmap-item">
+        <div class="roadmap-phase">Phase 2 · Q4 2026</div>
+        <div class="roadmap-title">Multilingual Expansion</div>
+        <div class="roadmap-text">Launch Arabic-language AI avatar streams alongside English, targeting the full UAE demographic. A single AI production model replicates across languages at near-zero marginal cost — unlocking a 2× addressable audience instantly.</div>
+        <div class="tags" style="margin-top:12px">
+          <span class="tag accent">Arabic AI</span>
+          <span class="tag">Localization</span>
+          <span class="tag">2× Audience</span>
+        </div>
+      </div>
+      <div class="roadmap-item">
+        <div class="roadmap-phase">Phase 3 · H1 2027</div>
+        <div class="roadmap-title">AI Commerce Intelligence</div>
+        <div class="roadmap-text">Integrate real-time product availability, dynamic pricing, and personalized AI-curated stream recommendations — transforming Firework from a broadcast channel into a fully intelligent commerce engine for Samsung UAE.</div>
+        <div class="tags" style="margin-top:12px">
+          <span class="tag accent">Dynamic Pricing</span>
+          <span class="tag">Personalization</span>
+          <span class="tag">Commerce AI</span>
+        </div>
+      </div>
+    </div>
+    <div class="divider"></div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px">
+      <div>
+        <div class="label" style="margin-bottom:16px">Scaling Multiplier Model</div>
+        <div class="chart-wrap">
+          <div class="chart-title">Projected View Potential (AI Scale-Up)</div>
+          <canvas id="projectionChart" height="180"></canvas>
+        </div>
+      </div>
+      <div>
+        <div class="label" style="margin-bottom:16px">AI Commerce Advantages</div>
+        <div class="scorecard-grid" style="grid-template-columns:1fr 1fr;margin-top:0">
+          <div class="score-item" style="background:linear-gradient(135deg,var(--accent-soft),var(--surface2))">
+            <div class="score-label">Scalability</div>
+            <div style="font-size:32px;font-weight:900;color:var(--accent);line-height:1">∞</div>
+            <div style="font-size:11px;color:var(--grey);font-family:var(--font-secondary)">No production ceiling</div>
+          </div>
+          <div class="score-item">
+            <div class="score-label">Repeatability</div>
+            <div style="font-size:32px;font-weight:900;color:var(--accent);line-height:1">100%</div>
+            <div style="font-size:11px;color:var(--grey);font-family:var(--font-secondary)">Consistent quality</div>
+          </div>
+          <div class="score-item">
+            <div class="score-label">Replay Efficiency</div>
+            <div style="font-size:32px;font-weight:900;color:var(--accent);line-height:1">80%</div>
+            <div style="font-size:11px;color:var(--grey);font-family:var(--font-secondary)">Views from replays</div>
+          </div>
+          <div class="score-item">
+            <div class="score-item" style="background:linear-gradient(135deg,var(--accent-soft),var(--surface2));border-color:rgba(12,107,255,0.3)">
+              <div class="score-label">Click Efficiency</div>
+              <div style="font-size:32px;font-weight:900;color:var(--accent);line-height:1">19×</div>
+              <div style="font-size:11px;color:var(--grey);font-family:var(--font-secondary)">vs Human streams</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════ SLIDE 10: CONCLUSION ═══════════════════════════════ -->
+<section class="slide conclusion-slide" id="slide-9">
+  <div class="grid-bg"></div>
+  <div class="accent-orb" style="width:800px;height:800px;left:50%;top:50%;transform:translate(-40%,-50%);opacity:0.4"></div>
+  <div class="noise"></div>
+  <div class="slide-inner">
+    <div class="eyebrow">Conclusion</div>
+    <div class="conclusion-quote">
+      "AI-powered livestream commerce is not the future of Samsung's digital engagement —<br/>
+      <span class="q-accent">it's the present.</span>"
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:40px;margin-top:32px">
+      <div>
+        <p class="insight-text" style="font-size:16px;line-height:1.7">
+          The Jan–Apr 2026 program demonstrates that Samsung x Firework AI livestream commerce consistently outperforms human-led streams on views, engagement, product clicks, and replay consumption — while operating at a fraction of the production cost and without capacity limits.
+        </p>
+        <p class="insight-text" style="font-size:16px;line-height:1.7;margin-top:16px">
+          The data is clear: AI avatar streams are not a replacement for human creativity — they are the scalable augmentation layer that allows Samsung to be everywhere, always, in every language, at every moment.
+        </p>
+        <div class="tags" style="margin-top:24px">
+          <span class="tag accent">Always-On Commerce</span>
+          <span class="tag accent">Scalable AI</span>
+          <span class="tag accent">Replay Monetization</span>
+          <span class="tag">UAE Market</span>
+          <span class="tag">Jan–Apr 2026</span>
+        </div>
+      </div>
+      <div>
+        <div class="kpi-grid" style="grid-template-columns:1fr 1fr">
+          <div class="kpi-card accent-card">
+            <div class="kpi-val accent">984K</div>
+            <div class="kpi-label">Impressions Generated</div>
+          </div>
+          <div class="kpi-card">
+            <div class="kpi-val">595K</div>
+            <div class="kpi-label">Total Views Delivered</div>
+          </div>
+          <div class="kpi-card">
+            <div class="kpi-val accent">19×</div>
+            <div class="kpi-label">AI Click Efficiency</div>
+          </div>
+          <div class="kpi-card">
+            <div class="kpi-val">266%</div>
+            <div class="kpi-label">View Growth Jan→Apr</div>
+          </div>
+        </div>
+        <div style="margin-top:20px;background:var(--surface2);border:1px solid rgba(12,107,255,0.3);border-radius:12px;padding:20px;background:linear-gradient(135deg,rgba(12,107,255,0.08),var(--surface2))">
+          <div class="eyebrow" style="margin-bottom:8px">Recommended Next Step</div>
+          <div style="font-size:14px;font-weight:600;margin-bottom:8px">Scale AI Avatar streams to 3× current volume in Q3 2026</div>
+          <div style="font-size:12px;color:var(--grey);line-height:1.5;font-family:var(--font-secondary)">With proven performance across 4 program months, the data supports doubling down on AI-powered content — expanding to Arabic, adding always-on product categories, and introducing interactive commerce layers.</div>
+        </div>
+      </div>
+    </div>
+    <div class="divider"></div>
+    <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px">
+      <div style="font-size:12px;color:var(--grey2);font-family:var(--font-secondary)">Samsung × Firework · UAE AI Commerce Business Review · Jan–Apr 2026</div>
+      <div style="display:flex;gap:12px">
+        <div class="logo-box" style="font-size:11px;padding:8px 16px">SAMSUNG</div>
+        <div class="logo-box" style="font-size:11px;padding:8px 16px;border-color:rgba(12,107,255,0.4);color:var(--accent);background:var(--accent-soft)">FIREWORK</div>
+      </div>
+      <div style="font-size:12px;color:var(--grey2);font-family:var(--font-secondary)">Powered by AI Commerce Intelligence</div>
+    </div>
+  </div>
+</section>
+
+<script>
+// ────────── NAVIGATION ──────────
+const slides = document.querySelectorAll('.slide');
+const navDotsEl = document.getElementById('navDots');
+const progressBar = document.getElementById('progressBar');
+let currentSlide = 0;
+
+slides.forEach((_,i)=>{
+  const dot = document.createElement('div');
+  dot.className = 'nav-dot' + (i===0?' active':'');
+  dot.onclick = ()=>slides[i].scrollIntoView({behavior:'smooth'});
+  navDotsEl.appendChild(dot);
+});
+
+window.addEventListener('scroll',()=>{
+  const scrolled = window.scrollY;
+  const total = document.body.scrollHeight - window.innerHeight;
+  progressBar.style.width = (scrolled/total*100)+'%';
+  const idx = Math.round(scrolled / window.innerHeight);
+  document.querySelectorAll('.nav-dot').forEach((d,i)=>{
+    d.classList.toggle('active', i===idx);
+  });
+});
+
+// ────────── CHART DEFAULTS ──────────
+Chart.defaults.color = '#888';
+Chart.defaults.borderColor = '#1e1e1e';
+Chart.defaults.font.family = "'Figtree', sans-serif";
+Chart.defaults.font.size = 11;
+
+const ACCENT = '#0C6BFF';
+const GREY = '#3a3a3a';
+const GREY2 = '#555';
+const WHITE = '#ffffff';
+const MONTHS = ['Jan', 'Feb', 'Mar', 'Apr'];
+
+// ────────── GROWTH CHART ──────────
+new Chart(document.getElementById('growthChart').getContext('2d'),{
+  type:'line',
+  data:{
+    labels: MONTHS,
+    datasets:[
+      {
+        label:'Video Views',
+        data:[39271,224180,188420,143590],
+        borderColor: ACCENT,
+        backgroundColor: 'rgba(12,107,255,0.08)',
+        fill:true,
+        tension:0.4,
+        borderWidth:2,
+        pointBackgroundColor: ACCENT,
+        pointRadius:5,
+        pointHoverRadius:8,
+      },
+      {
+        label:'Impressions',
+        data:[75420,381240,295340,232560],
+        borderColor: '#555',
+        backgroundColor: 'rgba(255,255,255,0.03)',
+        fill:true,
+        tension:0.4,
+        borderWidth:1.5,
+        borderDash:[4,4],
+        pointBackgroundColor: '#555',
+        pointRadius:4,
+      }
+    ]
+  },
+  options:{
+    responsive:true,
+    plugins:{legend:{position:'top',labels:{color:'#888',boxWidth:12,font:{size:11}}}},
+    scales:{
+      x:{grid:{color:'#1a1a1a'},ticks:{color:'#666'}},
+      y:{grid:{color:'#1a1a1a'},ticks:{color:'#666',callback:v=>v>=1000?Math.round(v/1000)+'K':v}}
+    }
+  }
+});
+
+// ────────── CLICKS CHART ──────────
+new Chart(document.getElementById('clicksChart').getContext('2d'),{
+  type:'bar',
+  data:{
+    labels: MONTHS,
+    datasets:[{
+      label:'Product Clicks',
+      data:[164,456,285,197],
+      backgroundColor: [
+        'rgba(12,107,255,0.5)',
+        'rgba(12,107,255,0.9)',
+        'rgba(12,107,255,0.7)',
+        'rgba(12,107,255,0.6)',
+      ],
+      borderRadius:6,
+      borderSkipped:false,
+    }]
+  },
+  options:{
+    responsive:true,
+    plugins:{legend:{display:false}},
+    scales:{
+      x:{grid:{display:false},ticks:{color:'#666'}},
+      y:{grid:{color:'#1a1a1a'},ticks:{color:'#666'}}
+    }
+  }
+});
+
+// ────────── ENGAGED VIEWS CHART ──────────
+new Chart(document.getElementById('engagedChart').getContext('2d'),{
+  type:'bar',
+  data:{
+    labels: MONTHS,
+    datasets:[
+      {label:'AI Engaged Views',data:[2190,6820,4180,3730],backgroundColor:ACCENT,borderRadius:4,borderSkipped:false},
+      {label:'Human Engaged Views',data:[700,1520,940,850],backgroundColor:GREY2,borderRadius:4,borderSkipped:false},
+    ]
+  },
+  options:{
+    responsive:true,
+    plugins:{legend:{position:'top',labels:{color:'#888',boxWidth:10,font:{size:10}}}},
+    scales:{
+      x:{grid:{display:false},stacked:false,ticks:{color:'#666'}},
+      y:{grid:{color:'#1a1a1a'},stacked:false,ticks:{color:'#666'}}
+    }
+  }
+});
+
+// ────────── ENGAGEMENT TYPE ──────────
+new Chart(document.getElementById('engTypeChart').getContext('2d'),{
+  type:'doughnut',
+  data:{
+    labels:['Replay Engaged','Live Engaged','60s+ Watch','Chat/Reactions'],
+    datasets:[{
+      data:[14820,4580,2840,1240],
+      backgroundColor:['rgba(12,107,255,0.9)','rgba(12,107,255,0.6)','rgba(12,107,255,0.35)','rgba(12,107,255,0.15)'],
+      borderColor:'#000',
+      borderWidth:2,
+    }]
+  },
+  options:{
+    responsive:true,
+    cutout:'65%',
+    plugins:{
+      legend:{position:'right',labels:{color:'#888',boxWidth:10,font:{size:10},padding:12}},
+    }
+  }
+});
+
+// ────────── STREAM LIST: VIEWS ──────────
+const topByViews = [
+  {rank:'01',name:'Galaxy A-series',type:'AI',val:'97,073',pct:100},
+  {rank:'02',name:'Galaxy S26 (gXbk4W)',type:'AI',val:'89,438',pct:92},
+  {rank:'03',name:'Galaxy S26 (vVbZL6)',type:'AI',val:'54,856',pct:56},
+  {rank:'04',name:'LIVE Discounts',type:'AI',val:'46,221',pct:47},
+  {rank:'05',name:'Ramadan Nights (gk1992)',type:'Human',val:'47,319',pct:49},
+  {rank:'06',name:'New Year, New You',type:'AI',val:'39,276',pct:40},
+  {rank:'07',name:'Your Everyday Better',type:'AI',val:'68,298',pct:70},
+];
+const topByClicks = [
+  {rank:'01',name:'LIVE Discounts (g23qJJ)',type:'AI',val:'168 clicks',pct:100},
+  {rank:'02',name:'Galaxy A-series (oA3b4k)',type:'AI',val:'107 clicks',pct:64},
+  {rank:'03',name:'Your Everyday Better',type:'AI',val:'167 clicks',pct:99},
+  {rank:'04',name:'New Year, New You (gwONEm)',type:'AI',val:'133 clicks',pct:79},
+  {rank:'05',name:'Ramadan Excl. (oBj1QO)',type:'AI',val:'46 clicks',pct:27},
+  {rank:'06',name:'Galaxy Ramadan Nights',type:'Human',val:'68 clicks',pct:40},
+  {rank:'07',name:'Buy More Save More',type:'AI',val:'37 clicks',pct:22},
+];
+function renderStreamList(id,data){
+  const el = document.getElementById(id);
+  el.innerHTML = data.map(s=>`
+    <div class="stream-item">
+      <span class="stream-rank">${s.rank}</span>
+      <span class="stream-name">${s.name}</span>
+      <span class="stream-type ${s.type==='AI'?'ai':'human'}">${s.type}</span>
+      <span class="stream-metric">${s.val}</span>
+      <div class="stream-bar"><div class="stream-bar-fill" style="width:${s.pct}%"></div></div>
+    </div>
+  `).join('');
+}
+renderStreamList('streamListViews',topByViews);
+renderStreamList('streamListClicks',topByClicks);
+
+// ────────── SHARE CHART ──────────
+new Chart(document.getElementById('shareChart').getContext('2d'),{
+  type:'pie',
+  data:{
+    labels:['AI Streams','Human Streams'],
+    datasets:[{
+      data:[530000,65000],
+      backgroundColor:['rgba(12,107,255,0.85)','rgba(255,255,255,0.12)'],
+      borderColor:['rgba(12,107,255,1)','rgba(255,255,255,0.2)'],
+      borderWidth:2,
+    }]
+  },
+  options:{
+    responsive:true,
+    plugins:{
+      legend:{position:'bottom',labels:{color:'#888',boxWidth:12,padding:12,font:{size:11}}},
+      tooltip:{callbacks:{label:ctx=>`${ctx.label}: ${Math.round(ctx.raw/1000)}K views (${Math.round(ctx.raw/595000*100)}%)`}}
+    }
+  }
+});
+
+// ────────── PRODUCT CHART ──────────
+new Chart(document.getElementById('productChart').getContext('2d'),{
+  type:'bar',
+  data:{
+    labels:['Galaxy S26 Series','Ramadan Deals','Galaxy A-series','LIVE Discounts','New Year Promo','S26 Offers','Pre-order S26','Galaxy A Replay','Discount Flash'],
+    datasets:[{
+      label:'Clicks',
+      data:[130,95,107,100,133,85,75,88,68],
+      backgroundColor: ctx=>{
+        const vals=[130,95,107,100,133,85,75,88,68];
+        const max=Math.max(...vals);
+        return `rgba(12,107,255,${0.35+0.65*ctx.raw/max})`;
+      },
+      borderRadius:5,
+      borderSkipped:false,
+    }]
+  },
+  options:{
+    indexAxis:'y',
+    responsive:true,
+    plugins:{legend:{display:false}},
+    scales:{
+      x:{grid:{color:'#1a1a1a'},ticks:{color:'#666'}},
+      y:{grid:{display:false},ticks:{color:'#888',font:{size:10}}}
+    }
+  }
+});
+
+// ────────── CLICK DIST CHART ──────────
+new Chart(document.getElementById('clickDistChart').getContext('2d'),{
+  type:'doughnut',
+  data:{
+    labels:['AI Live Clicks','AI Replay Clicks','Human Live Clicks','Human Replay Clicks'],
+    datasets:[{
+      data:[290,570,108,134],
+      backgroundColor:['rgba(12,107,255,0.95)','rgba(12,107,255,0.55)','rgba(100,100,120,0.7)','rgba(60,60,80,0.7)'],
+      borderColor:'#000',
+      borderWidth:2,
+    }]
+  },
+  options:{
+    responsive:true,
+    cutout:'62%',
+    plugins:{
+      legend:{position:'right',labels:{color:'#888',boxWidth:10,font:{size:10},padding:10}},
+      tooltip:{callbacks:{label:ctx=>`${ctx.label}: ${ctx.raw} clicks`}}
+    }
+  }
+});
+
+// ────────── ADOPTION CHART ──────────
+new Chart(document.getElementById('adoptionChart').getContext('2d'),{
+  type:'line',
+  data:{
+    labels:MONTHS,
+    datasets:[
+      {label:'AI Streams',data:[1,8,3,5],borderColor:ACCENT,backgroundColor:'rgba(12,107,255,0.1)',fill:true,tension:0.4,borderWidth:2,pointRadius:4},
+      {label:'Human Streams',data:[11,60,92,3],borderColor:GREY2,backgroundColor:'transparent',fill:false,tension:0.4,borderWidth:1.5,borderDash:[3,3],pointRadius:3},
+    ]
+  },
+  options:{
+    responsive:true,
+    plugins:{legend:{position:'top',labels:{color:'#888',boxWidth:10,font:{size:10}}}},
+    scales:{
+      x:{grid:{display:false},ticks:{color:'#666'}},
+      y:{grid:{color:'#1a1a1a'},ticks:{color:'#666'}}
+    }
+  }
+});
+
+// ────────── VALUE CHART ──────────
+new Chart(document.getElementById('valueChart').getContext('2d'),{
+  type:'bar',
+  data:{
+    labels:['Avg Views','Avg Clicks','Engage Rate%'],
+    datasets:[
+      {label:'AI',data:[8240,30.7,7.8],backgroundColor:'rgba(12,107,255,0.85)',borderRadius:4,borderSkipped:false},
+      {label:'Human',data:[420,1.6,6.2],backgroundColor:'rgba(80,80,100,0.7)',borderRadius:4,borderSkipped:false},
+    ]
+  },
+  options:{
+    responsive:true,
+    plugins:{legend:{position:'top',labels:{color:'#888',boxWidth:10,font:{size:10}}}},
+    scales:{
+      x:{grid:{display:false},ticks:{color:'#666'}},
+      y:{type:'logarithmic',grid:{color:'#1a1a1a'},ticks:{color:'#666'}}
+    }
+  }
+});
+
+// ────────── COMMERCE CHART ──────────
+new Chart(document.getElementById('commerceChart').getContext('2d'),{
+  type:'line',
+  data:{
+    labels:MONTHS,
+    datasets:[{
+      label:'Commerce Events (Clicks)',
+      data:[164,456,285,197],
+      borderColor:ACCENT,
+      backgroundColor:'rgba(12,107,255,0.1)',
+      fill:true,
+      tension:0.4,
+      borderWidth:2.5,
+      pointRadius:5,
+      pointBackgroundColor:ACCENT,
+    }]
+  },
+  options:{
+    responsive:true,
+    plugins:{legend:{display:false}},
+    scales:{
+      x:{grid:{display:false},ticks:{color:'#666'}},
+      y:{grid:{color:'#1a1a1a'},ticks:{color:'#666'}}
+    }
+  }
+});
+
+// ────────── PROJECTION CHART ──────────
+new Chart(document.getElementById('projectionChart').getContext('2d'),{
+  type:'line',
+  data:{
+    labels:['Jan','Feb','Mar','Apr','May*','Jun*','Jul*','Q4*'],
+    datasets:[
+      {
+        label:'Actual',
+        data:[39271,224180,188420,143590,null,null,null,null],
+        borderColor:ACCENT,backgroundColor:'rgba(12,107,255,0.1)',fill:true,tension:0.4,borderWidth:2,pointRadius:4,
+      },
+      {
+        label:'Projected (3× AI Scale)',
+        data:[null,null,null,143590,260000,380000,520000,800000],
+        borderColor:'rgba(12,107,255,0.45)',backgroundColor:'rgba(12,107,255,0.04)',fill:true,tension:0.4,borderWidth:2,borderDash:[5,5],pointRadius:4,
+      }
+    ]
+  },
+  options:{
+    responsive:true,
+    plugins:{legend:{position:'top',labels:{color:'#888',boxWidth:10,font:{size:10}}}},
+    scales:{
+      x:{grid:{display:false},ticks:{color:'#666'}},
+      y:{grid:{color:'#1a1a1a'},ticks:{color:'#666',callback:v=>v>=1000?Math.round(v/1000)+'K':v}}
+    }
+  }
+});
+
+// ────────── ANIMATED COUNTERS ──────────
+function animateCount(el, target, prefix='', suffix='', decimals=0){
+  const start = 0;
+  const duration = 2000;
+  const startTime = performance.now();
+  function update(now){
+    const elapsed = now - startTime;
+    const progress = Math.min(elapsed/duration, 1);
+    const eased = 1 - Math.pow(1-progress, 3);
+    const current = Math.floor(start + (target-start)*eased);
+    el.textContent = prefix + current.toLocaleString() + suffix;
+    if(progress < 1) requestAnimationFrame(update);
+  }
+  requestAnimationFrame(update);
+}
+
+const observer = new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      const el = e.target;
+      const val = parseInt(el.dataset.target);
+      animateCount(el, val, el.dataset.prefix||'', el.dataset.suffix||'');
+      observer.unobserve(el);
+    }
+  });
+},{threshold:0.5});
+
+document.querySelectorAll('[data-target]').forEach(el=>observer.observe(el));
+</script>
+</body>
+</html>
